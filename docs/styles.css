@@ -420,3 +420,7 @@ select {
   cursor: pointer;
   margin-bottom: 16px;
 }
+
+/* FORGOT PASSWORD */
+.forgot-link { margin: 14px 0 0; text-align: center; }
+#recovery-screen { z-index: 10000; }

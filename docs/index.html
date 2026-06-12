@@ -25,6 +25,20 @@
     <input type="password" class="setup-input" id="auth-password" placeholder="••••••••" autocomplete="current-password"/>
     <div class="setup-hint" id="auth-hint">Welcome back — sign in to launch your dashboard.</div>
     <button class="btn-grad" id="auth-submit" onclick="submitAuth()">Sign In →</button>
+    <div class="setup-hint forgot-link"><a href="#" onclick="forgotPassword();return false;">Forgot password?</a></div>
+  </div>
+</div>
+
+<!-- PASSWORD RECOVERY SCREEN -->
+<div id="recovery-screen" class="overlay-screen" style="display:none">
+  <div class="setup-card">
+    <div class="setup-logo">Reel<span class="g">Rocket</span> 🚀</div>
+    <div class="setup-sub">Set a new password for your account</div>
+    <div class="setup-label">New password</div>
+    <input type="password" class="setup-input" id="recovery-password" placeholder="••••••••" autocomplete="new-password"/>
+    <div class="setup-label">Confirm new password</div>
+    <input type="password" class="setup-input" id="recovery-password2" placeholder="••••••••" autocomplete="new-password"/>
+    <button class="btn-grad" id="recovery-submit" onclick="submitNewPassword()">Save New Password →</button>
   </div>
 </div>
 

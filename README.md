@@ -76,6 +76,5 @@ polls the profile for up to ~20s while the webhook lands.
 
 - [ ] Move content history + viral library from localStorage into per-user Postgres tables
 - [ ] Usage metering / fair-use limits on `claude-proxy`
-- [ ] Password reset flow ("Forgot password?")
 - [ ] Marketing/landing page before the auth screen
 - [ ] Custom domain

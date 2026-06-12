@@ -10,8 +10,12 @@ async function initAuth() {
   const { data: { session } } = await sb.auth.getSession();
   await handleSession(session);
   sb.auth.onAuthStateChange((event, session) => {
+    if (event === 'PASSWORD_RECOVERY') { showRecovery(true); return; }
     if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') handleSession(session);
   });
+  // Arriving via a reset link: show the recovery screen straight away rather
+  // than waiting for the auth event, so the dashboard never flashes first.
+  if (location.hash.includes('type=recovery')) showRecovery(true);
   // Returning from Stripe Checkout: the webhook may land a moment after the
   // redirect, so poll the profile a few times before giving up.
   if (new URLSearchParams(location.search).get('checkout') === 'success') {
@@ -92,6 +96,42 @@ async function submitAuth() {
     }
   } catch (e) {
     showToast(e.message || 'Authentication failed');
+  }
+  btn.disabled = false;
+}
+
+async function forgotPassword() {
+  const email = document.getElementById('auth-email').value.trim();
+  if (!email) { showToast('Type your email in the box above, then click forgot password'); return; }
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: location.origin + location.pathname,
+  });
+  if (error) { showToast(error.message); return; }
+  document.getElementById('auth-hint').textContent = '📬 Reset link sent — check your inbox.';
+  showToast('Reset link sent — check your inbox', 'success');
+}
+
+function showRecovery(on) {
+  document.getElementById('recovery-screen').style.display = on ? 'flex' : 'none';
+}
+
+async function submitNewPassword() {
+  const p1 = document.getElementById('recovery-password').value;
+  const p2 = document.getElementById('recovery-password2').value;
+  if (p1.length < 8) { showToast('Password must be at least 8 characters'); return; }
+  if (p1 !== p2) { showToast("Passwords don't match"); return; }
+  const btn = document.getElementById('recovery-submit');
+  btn.disabled = true;
+  try {
+    const { error } = await sb.auth.updateUser({ password: p1 });
+    if (error) throw error;
+    showRecovery(false);
+    history.replaceState({}, '', location.pathname);
+    showToast('✅ Password updated — welcome back!', 'success');
+    const { data: { session } } = await sb.auth.getSession();
+    await handleSession(session);
+  } catch (e) {
+    showToast(e.message || 'Could not update password');
   }
   btn.disabled = false;
 }
