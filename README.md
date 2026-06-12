@@ -8,7 +8,7 @@ Comment Reply Assistant, Viral Inspiration) behind a monthly subscription.
 
 | Layer | Tech |
 |---|---|
-| Frontend | Static HTML/CSS/JS in `public/`, deployed on Netlify |
+| Frontend | Static HTML/CSS/JS in `docs/`, deployed on GitHub Pages |
 | Auth | Supabase email/password |
 | AI backend | Supabase Edge Function `claude-proxy` → Anthropic API (key stays server-side) |
 | Payments | Stripe Checkout subscription, synced via `stripe-webhook` |
@@ -30,7 +30,7 @@ API key, no auth). It still works on its own — just open it in a browser.
 ### 1. Supabase
 
 1. Create a project at [database.new](https://database.new).
-2. Copy the project URL and anon key (Settings → API) into `public/js/config.js`.
+2. Copy the project URL and anon key (Settings → API) into `docs/js/config.js`.
 3. Install the CLI and link: `supabase login`, then `supabase link --project-ref <your-ref>`.
 4. Apply the migration: `supabase db push`
 5. Set the function secrets:
@@ -56,13 +56,16 @@ API key, no auth). It still works on its own — just open it in a browser.
    `customer.subscription.deleted`. Copy its signing secret (`whsec_...`) into the secrets above.
 3. Enable the **customer portal** (Settings → Billing → Customer portal) so "Manage billing" works.
 
-### 3. Netlify
+### 3. Hosting (GitHub Pages)
 
 1. Push this repo to GitHub.
-2. In Netlify: Add new site → Import from GitHub → pick the repo. `netlify.toml`
-   already sets the publish directory to `public/` — no build command needed.
+2. Repo Settings → Pages → deploy from branch `main`, folder `/docs`.
+   Site goes live at `https://<user>.github.io/ReelRocket/`.
 3. Put the final site URL into the `SITE_URL` secret (step 1.5) and into
    Supabase Auth → URL Configuration → Site URL (so confirmation emails link correctly).
+
+(`netlify.toml` is kept in the repo — importing the repo into Netlify also works,
+no build command needed.)
 
 ### Testing the payment flow
 
