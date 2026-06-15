@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>ReelRocket — AI Tools for Instagram & TikTok Creators</title>
-<meta name="description" content="Six AI-powered tools to write scroll-stopping captions, score ideas before you post, and grow faster on Instagram & TikTok. 3 days free, then £9.99/month."/>
+<title>ReelRocket — AI Tools for Instagram &amp; TikTok Creators</title>
+<meta name="description" content="Six AI-powered tools to write scroll-stopping captions, score ideas before you post, and grow faster on Instagram &amp; TikTok. 3 days free, then £9.99/month."/>
 <meta property="og:title" content="ReelRocket — AI Tools for Creators"/>
 <meta property="og:description" content="Six AI tools in one dashboard. Write captions, score ideas, plan content. 3 days free."/>
+<meta name="theme-color" content="#07070e"/>
 
-<!-- Forward auth deep-links that land on the root to the app -->
+<!-- Deep-link forward for auth hashes -->
 <script>
 if (/access_token|type=recovery|error_description|type=signup/.test(location.hash)) {
   location.replace('app/' + location.hash);
@@ -33,90 +34,144 @@ tailwind.config = {
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-/* ── Gradient utilities ──────────────────────────────────── */
+/* ─── Gradient text ──────────────────────────────────────── */
 .g {
-  background: linear-gradient(135deg, #a78bfa 0%, #7C3AED 45%, #2DD4BF 100%);
+  background: linear-gradient(135deg, #c4b5fd 0%, #7C3AED 40%, #2DD4BF 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.g-alt {
-  background: linear-gradient(135deg, #7C3AED 0%, #2DD4BF 100%);
+.g-teal {
+  background: linear-gradient(135deg, #2DD4BF, #7C3AED);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.btn-g {
-  background: linear-gradient(135deg, #7C3AED 0%, #5b21b6 50%, #2DD4BF 100%);
-  background-size: 200% auto;
-  transition: background-position 0.4s ease, transform 0.1s, opacity 0.2s;
-}
-.btn-g:hover  { background-position: right center; opacity: .94; }
-.btn-g:active { transform: scale(.98); }
 
-/* ── Glow / ambient effects ──────────────────────────────── */
+/* ─── CTA button ──────────────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, #7C3AED 0%, #6B21A8 40%, #0d9488 100%);
+  background-size: 200% auto;
+  transition: background-position .45s ease, transform .12s, box-shadow .2s;
+  box-shadow: 0 0 32px rgba(107,33,168,.45), 0 4px 16px rgba(0,0,0,.4);
+}
+.btn-primary:hover {
+  background-position: right center;
+  box-shadow: 0 0 48px rgba(107,33,168,.6), 0 8px 24px rgba(0,0,0,.5);
+}
+.btn-primary:active { transform: scale(.97); }
+
+.btn-secondary {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  transition: background .2s, border-color .2s, color .2s;
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,.09);
+  border-color: rgba(255,255,255,.22);
+}
+
+/* ─── Ambient / glow ─────────────────────────────────────── */
 .hero-glow {
-  background: radial-gradient(ellipse 80% 60% at 50% -10%,
-    rgba(107,33,168,.32) 0%, rgba(45,212,191,.08) 50%, transparent 70%);
+  background:
+    radial-gradient(ellipse 90% 70% at 50% -5%, rgba(107,33,168,.38) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 80% 60%, rgba(45,212,191,.08) 0%, transparent 55%);
 }
-.card-glow:hover {
-  box-shadow: 0 0 0 1px rgba(124,58,237,.45),
-              0 24px 48px -12px rgba(107,33,168,.28);
-}
-.pricing-glow {
-  box-shadow: 0 0 0 1px rgba(124,58,237,.3),
-              0 40px 80px -20px rgba(107,33,168,.4);
+.section-glow {
+  background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(107,33,168,.18) 0%, transparent 65%);
 }
 
-/* ── Grid overlay texture ────────────────────────────────── */
-.grid-texture {
+/* ─── Grid texture ───────────────────────────────────────── */
+.grid-tex {
   background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size: 64px 64px;
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
-/* ── Shimmer badge ───────────────────────────────────────── */
-@keyframes shimmer { to { background-position: -200% center; } }
-.badge-shimmer {
-  background: linear-gradient(90deg,
-    rgba(167,139,250,.6) 25%, rgba(167,139,250,1) 50%, rgba(167,139,250,.6) 75%);
-  background-size: 200% auto;
-  animation: shimmer 3s linear infinite;
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ─── Tool cards ─────────────────────────────────────────── */
+.tool-card {
+  background: rgba(12,12,22,.95);
+  border: 1px solid rgba(255,255,255,.07);
+  transition: transform .25s ease, border-color .25s, box-shadow .25s;
+  position: relative;
+  overflow: hidden;
 }
-
-/* ── Float animation ─────────────────────────────────────── */
-@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-.float { animation: float 5s ease-in-out infinite; }
-
-/* ── Pulse dot ───────────────────────────────────────────── */
-@keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
-.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
-
-/* ── Step connector line ─────────────────────────────────── */
-.step-line::after {
+.tool-card::before {
   content: '';
   position: absolute;
-  top: 24px; left: calc(50% + 32px);
-  width: calc(100% - 64px); height: 1px;
-  background: linear-gradient(90deg, rgba(124,58,237,.5), rgba(45,212,191,.5));
+  inset: 0;
+  opacity: 0;
+  transition: opacity .3s;
+  background: radial-gradient(ellipse 80% 80% at 50% -10%, rgba(124,58,237,.12), transparent 70%);
+}
+.tool-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(124,58,237,.35);
+  box-shadow: 0 0 0 1px rgba(124,58,237,.2), 0 24px 48px -12px rgba(107,33,168,.3);
+}
+.tool-card:hover::before { opacity: 1; }
+
+.tool-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.tool-card:hover .tool-bar { opacity: 1; }
+
+/* ─── Shimmer badge ──────────────────────────────────────── */
+@keyframes shimmer { to { background-position: -200% center; } }
+.shimmer {
+  background: linear-gradient(90deg,
+    rgba(167,139,250,.55) 20%, rgba(196,181,253,1) 50%, rgba(167,139,250,.55) 80%);
+  background-size: 200%;
+  animation: shimmer 2.8s linear infinite;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* ── Testimonial card border glow ────────────────────────── */
-.testi-card:hover {
-  border-color: rgba(124,58,237,.4);
-  box-shadow: 0 8px 32px -8px rgba(107,33,168,.2);
+/* ─── Float ──────────────────────────────────────────────── */
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+.float { animation: float 5.5s ease-in-out infinite; }
+
+/* ─── Pulse dot ──────────────────────────────────────────── */
+@keyframes pdot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.75)} }
+.pdot { animation: pdot 2.2s ease-in-out infinite; }
+
+/* ─── Ticker ─────────────────────────────────────────────── */
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.ticker-inner { animation: ticker 22s linear infinite; display: flex; width: max-content; }
+
+/* ─── Testimonial card ───────────────────────────────────── */
+.tcard {
+  background: rgba(12,12,22,.95);
+  border: 1px solid rgba(255,255,255,.07);
+  transition: border-color .25s, box-shadow .25s, transform .25s;
+}
+.tcard:hover {
+  border-color: rgba(124,58,237,.3);
+  box-shadow: 0 12px 40px -10px rgba(107,33,168,.22);
+  transform: translateY(-3px);
 }
 
-/* ── Smooth scroll + scrollbar ───────────────────────────── */
+/* ─── Pricing glow ───────────────────────────────────────── */
+.price-card {
+  background: rgba(11,11,20,.99);
+  box-shadow:
+    0 0 0 1px rgba(124,58,237,.28),
+    0 0 80px -20px rgba(107,33,168,.45),
+    0 40px 80px -24px rgba(0,0,0,.7);
+}
+
+/* ─── Scroll + scrollbar ─────────────────────────────────── */
 html { scroll-behavior: smooth; }
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #07070e; }
-::-webkit-scrollbar-thumb { background: rgba(124,58,237,.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: rgba(124,58,237,.35); border-radius: 4px; }
 
-/* ── Reduced motion ──────────────────────────────────────── */
+/* ─── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .float, .pulse-dot, .badge-shimmer { animation: none; }
+  .float, .pdot, .shimmer, .ticker-inner { animation: none; }
 }
 </style>
 </head>
@@ -125,141 +180,198 @@ html { scroll-behavior: smooth; }
 <!-- ══════════════════════════════════════════════════════════
      NAV
 ══════════════════════════════════════════════════════════ -->
-<nav class="sticky top-0 z-50 border-b border-white/[0.07]"
-     style="background:rgba(7,7,14,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)">
+<nav class="sticky top-0 z-50 border-b border-white/[0.065]"
+     style="background:rgba(7,7,14,.86);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)">
   <div class="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16">
 
-    <a href="#" class="font-display font-extrabold text-xl tracking-tight text-zinc-100 no-underline">
-      Reel<span class="g">Rocket</span> 🚀
+    <a href="#" class="font-display font-extrabold text-xl tracking-tight text-zinc-100 no-underline flex items-center gap-1">
+      Reel<span class="g">Rocket</span>&nbsp;🚀
     </a>
 
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#tools"    class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">Tools</a>
-      <a href="#how"      class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">How it works</a>
-      <a href="#stories"  class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">Stories</a>
-      <a href="#pricing"  class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">Pricing</a>
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#tools"   class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">Tools</a>
+      <a href="#how"     class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">How it works</a>
+      <a href="#stories" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">Stories</a>
+      <a href="#pricing" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">Pricing</a>
     </div>
 
     <div class="flex items-center gap-3">
       <a href="app/" class="hidden sm:inline text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">Sign in</a>
       <a href="app/?signup=1"
-         class="btn-g inline-block px-5 py-2.5 rounded-xl text-white font-display font-bold text-sm no-underline shadow-lg shadow-violet-950/40">
-        Start Free Trial
+         class="btn-primary inline-block px-5 py-2.5 rounded-xl text-white font-display font-bold text-sm no-underline">
+        Launch Dashboard
       </a>
     </div>
   </div>
 </nav>
 
 <!-- ══════════════════════════════════════════════════════════
+     TICKER
+══════════════════════════════════════════════════════════ -->
+<div class="overflow-hidden border-b border-white/[0.05] py-2.5 select-none"
+     style="background:rgba(124,58,237,.06)">
+  <div class="ticker-inner text-[11px] font-bold tracking-widest text-zinc-500 uppercase">
+    <span class="flex gap-12 px-6">
+      <span>✍️ Caption Writer</span><span>·</span>
+      <span>📊 Algo Analyzer</span><span>·</span>
+      <span>📈 Post History Analyzer</span><span>·</span>
+      <span>🧠 Brain Dump to Content</span><span>·</span>
+      <span>💬 Comment Reply Assistant</span><span>·</span>
+      <span>🔥 Viral Inspiration</span><span>·</span>
+      <span class="text-violet-500">6 Tools · One Dashboard · £9.99/mo</span><span>·</span>
+    </span>
+    <!-- duplicate for seamless loop -->
+    <span class="flex gap-12 px-6" aria-hidden="true">
+      <span>✍️ Caption Writer</span><span>·</span>
+      <span>📊 Algo Analyzer</span><span>·</span>
+      <span>📈 Post History Analyzer</span><span>·</span>
+      <span>🧠 Brain Dump to Content</span><span>·</span>
+      <span>💬 Comment Reply Assistant</span><span>·</span>
+      <span>🔥 Viral Inspiration</span><span>·</span>
+      <span class="text-violet-500">6 Tools · One Dashboard · £9.99/mo</span><span>·</span>
+    </span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
      HERO
 ══════════════════════════════════════════════════════════ -->
-<section class="relative pt-20 pb-24 sm:pt-28 sm:pb-32 overflow-hidden">
+<section class="relative pt-20 pb-28 sm:pt-28 sm:pb-36 overflow-hidden">
 
-  <!-- Ambient glow -->
   <div class="hero-glow absolute inset-0 pointer-events-none"></div>
-  <!-- Subtle grid texture -->
-  <div class="grid-texture absolute inset-0 opacity-100 pointer-events-none"></div>
+  <div class="grid-tex absolute inset-0 pointer-events-none"></div>
+
+  <!-- Decorative orbs -->
+  <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full pointer-events-none"
+       style="background:radial-gradient(circle,rgba(107,33,168,.18),transparent 70%);filter:blur(40px)"></div>
+  <div class="absolute top-40 -right-20 w-72 h-72 rounded-full pointer-events-none"
+       style="background:radial-gradient(circle,rgba(45,212,191,.1),transparent 70%);filter:blur(40px)"></div>
 
   <div class="relative max-w-5xl mx-auto px-5 sm:px-8 text-center">
 
     <!-- Badge -->
     <div class="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 text-[11px] font-bold tracking-widest mb-8 border"
-         style="background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.3)">
-      <span class="w-1.5 h-1.5 rounded-full bg-teal-400 pulse-dot"></span>
-      <span class="badge-shimmer">AI TOOLS FOR CREATORS · 6 TOOLS · ONE DASHBOARD</span>
+         style="background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.28)">
+      <span class="w-1.5 h-1.5 rounded-full bg-teal-400 pdot"></span>
+      <span class="shimmer">AI TOOLKIT FOR INSTAGRAM &amp; TIKTOK CREATORS</span>
     </div>
 
     <!-- Headline -->
-    <h1 class="font-display font-extrabold tracking-tight leading-[1.1] mb-6">
-      <span class="block text-[clamp(2.4rem,6vw,4.5rem)] text-zinc-100">Stop guessing.</span>
-      <span class="block text-[clamp(2.4rem,6vw,4.5rem)] g">Start growing.</span>
+    <h1 class="font-display font-extrabold tracking-tight leading-[1.08] mb-6">
+      <span class="block text-[clamp(2.5rem,6.5vw,4.75rem)] text-zinc-50">Stop guessing.</span>
+      <span class="block text-[clamp(2.5rem,6.5vw,4.75rem)] g mt-1">Start going viral.</span>
     </h1>
 
-    <!-- Sub -->
-    <p class="text-zinc-400 text-lg sm:text-xl max-w-[600px] mx-auto mb-10 leading-relaxed">
-      ReelRocket gives busy creators <strong class="text-zinc-300 font-medium">6 AI tools</strong> to write
-      scroll-stopping captions, score ideas before you post, and turn a brain dump into a
-      full content calendar — in seconds.
+    <!-- Subheadline -->
+    <p class="text-zinc-400 text-lg sm:text-xl max-w-[620px] mx-auto mb-10 leading-relaxed">
+      ReelRocket bundles <strong class="text-zinc-200 font-semibold">6 AI-powered tools</strong> for creators who need to post smarter, not harder —
+      scroll-stopping captions, algorithm scores, and a full content calendar, all in one dashboard.
     </p>
 
-    <!-- CTA row -->
+    <!-- CTAs -->
     <div class="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center mb-5">
       <a href="app/?signup=1"
-         class="btn-g px-9 py-4 rounded-xl text-white font-display font-bold text-base no-underline text-center shadow-xl shadow-violet-950/50">
-        Start Free Trial →
+         class="btn-primary px-9 py-4 rounded-xl text-white font-display font-bold text-base no-underline text-center">
+        🚀 Launch Dashboard — Free for 3 Days
       </a>
       <a href="#tools"
-         class="px-9 py-4 rounded-xl font-medium text-base no-underline text-center text-zinc-300 hover:text-white border border-white/10 hover:border-white/20 transition-all"
-         style="background:rgba(255,255,255,.04)">
-        See the tools ↓
+         class="btn-secondary px-9 py-4 rounded-xl font-medium text-base no-underline text-center text-zinc-300 hover:text-white">
+        See all 6 tools ↓
       </a>
     </div>
-    <p class="text-sm text-zinc-600">3 days free &nbsp;·&nbsp; £9.99/month &nbsp;·&nbsp; cancel anytime</p>
+    <p class="text-sm text-zinc-600">No credit card · £9.99/month after trial · cancel anytime</p>
 
-    <!-- Hero mockup card -->
-    <div class="float mt-16 sm:mt-20 max-w-xl mx-auto">
-      <div class="rounded-2xl border border-white/10 overflow-hidden text-left shadow-2xl shadow-violet-950/60"
-           style="background:rgba(13,13,24,.98)">
+    <!-- Hero mockup -->
+    <div class="float mt-16 sm:mt-20 max-w-lg mx-auto">
+      <div class="rounded-2xl border border-white/[0.09] overflow-hidden text-left"
+           style="background:rgba(11,11,20,.99);box-shadow:0 0 0 1px rgba(124,58,237,.15),0 32px 80px -16px rgba(107,33,168,.4),0 0 120px -40px rgba(45,212,191,.08)">
 
         <!-- Browser chrome -->
         <div class="flex items-center gap-1.5 px-4 py-3 border-b border-white/[0.06]"
-             style="background:rgba(255,255,255,.02)">
-          <div class="w-3 h-3 rounded-full bg-red-900/60"></div>
-          <div class="w-3 h-3 rounded-full bg-yellow-900/60"></div>
-          <div class="w-3 h-3 rounded-full bg-green-900/60"></div>
-          <span class="ml-3 text-[11px] text-zinc-600 font-mono">reelrocket.app · Caption Writer</span>
-          <div class="ml-auto flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
-            <span class="text-[11px] font-semibold text-emerald-400">Live</span>
+             style="background:rgba(255,255,255,.025)">
+          <div class="w-2.5 h-2.5 rounded-full" style="background:#ff5f56"></div>
+          <div class="w-2.5 h-2.5 rounded-full" style="background:#ffbd2e"></div>
+          <div class="w-2.5 h-2.5 rounded-full" style="background:#27c93f"></div>
+          <div class="flex-1 mx-3 rounded-md px-3 py-1 text-[10px] text-zinc-600 font-mono"
+               style="background:rgba(255,255,255,.04)">app.reelrocket.io &nbsp;·&nbsp; Caption Writer</div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pdot"></span>
+            <span class="text-[10px] font-bold text-emerald-400">LIVE</span>
           </div>
         </div>
 
-        <!-- Content -->
-        <div class="p-5 sm:p-6">
-          <!-- Tool header row -->
-          <div class="flex items-center gap-2.5 mb-5">
-            <div class="w-8 h-8 rounded-lg flex items-center justify-center text-base flex-shrink-0"
-                 style="background:linear-gradient(135deg,rgba(124,58,237,.4),rgba(45,212,191,.2))">✍️</div>
-            <div>
-              <div class="text-sm font-display font-bold text-zinc-100">Caption Writer</div>
-              <div class="text-[11px] text-zinc-500">Generated 3 captions in 4s</div>
+        <!-- Sidebar + content -->
+        <div class="flex">
+          <!-- Mini sidebar -->
+          <div class="hidden sm:flex flex-col gap-0.5 p-3 border-r border-white/[0.06] w-36 flex-shrink-0"
+               style="background:rgba(255,255,255,.01)">
+            <div class="text-[9px] font-bold uppercase tracking-widest text-zinc-600 px-2 py-1 mb-1">Your tools</div>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-lg text-[11px] font-semibold text-zinc-100"
+                 style="background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.25)">
+              <span>✍️</span> Caption
             </div>
-            <div class="ml-auto flex gap-1.5">
-              <span class="text-[11px] px-2.5 py-0.5 rounded-full font-semibold"
-                    style="background:rgba(124,58,237,.18);color:#a78bfa;border:1px solid rgba(124,58,237,.3)">TikTok</span>
-              <span class="text-[11px] px-2.5 py-0.5 rounded-full font-semibold"
-                    style="background:rgba(255,255,255,.06);color:#a1a1aa;border:1px solid rgba(255,255,255,.08)">Casual</span>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-[11px] text-zinc-500">
+              <span>📊</span> Algo Score
             </div>
-          </div>
-
-          <!-- Caption output -->
-          <div class="rounded-xl p-4 mb-3 border border-white/[0.07]" style="background:rgba(255,255,255,.03)">
-            <div class="text-[10px] font-bold uppercase tracking-widest text-zinc-600 mb-2.5">Caption 1 of 3</div>
-            <p class="text-sm text-zinc-200 leading-relaxed mb-1">
-              POV: you finally cracked the morning skincare code ✨
-            </p>
-            <p class="text-sm text-zinc-400 leading-relaxed mb-3">
-              5 steps. 10 minutes. Zero greasy skin by noon. Oily girlies, this one's for you 🙋‍♀️ Save this before your next Sephora run.
-            </p>
-            <div class="flex flex-wrap gap-x-2 gap-y-1">
-              <span class="text-[12px] text-violet-400">#skintok</span>
-              <span class="text-[12px] text-violet-400">#morningroutine</span>
-              <span class="text-[12px] text-violet-400">#oilyskin</span>
-              <span class="text-[12px] text-violet-400">#skincaretips</span>
-              <span class="text-[12px] text-zinc-600">+11 more</span>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-[11px] text-zinc-500">
+              <span>📈</span> Post History
+            </div>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-[11px] text-zinc-500">
+              <span>🧠</span> Brain Dump
+            </div>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-[11px] text-zinc-500">
+              <span>💬</span> Replies
+            </div>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-[11px] text-zinc-500">
+              <span>🔥</span> Viral Inspo
             </div>
           </div>
 
-          <!-- Actions row -->
-          <div class="flex items-center gap-2">
-            <button class="text-[12px] px-3 py-1.5 rounded-lg border border-white/[0.09] text-zinc-400 font-medium"
-                    style="background:rgba(255,255,255,.04)">Copy</button>
-            <button class="text-[12px] px-3 py-1.5 rounded-lg border border-white/[0.09] text-zinc-400 font-medium"
-                    style="background:rgba(255,255,255,.04)">Save</button>
-            <div class="ml-auto flex gap-1">
-              <div class="w-2 h-2 rounded-full bg-violet-500"></div>
-              <div class="w-2 h-2 rounded-full bg-violet-800"></div>
-              <div class="w-2 h-2 rounded-full bg-violet-800"></div>
+          <!-- Main content -->
+          <div class="p-5 flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center text-sm flex-shrink-0"
+                   style="background:linear-gradient(135deg,rgba(124,58,237,.4),rgba(45,212,191,.2))">✍️</div>
+              <div class="min-w-0">
+                <div class="text-sm font-display font-bold text-zinc-100 truncate">Caption Writer</div>
+                <div class="text-[10px] text-zinc-500">3 options ready in 4s</div>
+              </div>
+              <div class="ml-auto flex gap-1.5 flex-shrink-0">
+                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold"
+                      style="background:rgba(124,58,237,.18);color:#a78bfa;border:1px solid rgba(124,58,237,.3)">TikTok</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold"
+                      style="background:rgba(255,255,255,.06);color:#a1a1aa;border:1px solid rgba(255,255,255,.1)">Casual</span>
+              </div>
+            </div>
+
+            <!-- Caption output -->
+            <div class="rounded-xl p-4 mb-3 border border-white/[0.07]" style="background:rgba(255,255,255,.03)">
+              <div class="text-[9px] font-bold uppercase tracking-widest text-zinc-600 mb-2">Caption 1 of 3</div>
+              <p class="text-[13px] text-zinc-200 leading-relaxed mb-0.5">
+                POV: you finally cracked the morning skincare code ✨
+              </p>
+              <p class="text-[13px] text-zinc-400 leading-relaxed mb-3">
+                5 steps. 10 minutes. Zero greasy skin. Save this before your next Sephora run 🙋‍♀️
+              </p>
+              <div class="flex flex-wrap gap-x-1.5 gap-y-1">
+                <span class="text-[11px] text-violet-400">#skintok</span>
+                <span class="text-[11px] text-violet-400">#oilyskin</span>
+                <span class="text-[11px] text-violet-400">#morningroutine</span>
+                <span class="text-[11px] text-zinc-600">+9 more</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button class="text-[11px] px-3 py-1.5 rounded-lg border border-white/[0.08] text-zinc-400 font-medium"
+                      style="background:rgba(255,255,255,.04)">Copy ↗</button>
+              <button class="text-[11px] px-3 py-1.5 rounded-lg border border-white/[0.08] text-zinc-400 font-medium"
+                      style="background:rgba(255,255,255,.04)">Save</button>
+              <div class="ml-auto flex gap-1 items-center">
+                <span class="text-[10px] text-zinc-600 mr-1">1/3</span>
+                <div class="w-1.5 h-1.5 rounded-full bg-violet-500"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-violet-800/60"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-violet-800/60"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -269,26 +381,26 @@ html { scroll-behavior: smooth; }
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
-     TRUST BAR
+     STATS BAR
 ══════════════════════════════════════════════════════════ -->
-<div class="border-y border-white/[0.06] py-12" style="background:rgba(255,255,255,.018)">
+<div class="border-y border-white/[0.06] py-12" style="background:rgba(255,255,255,.017)">
   <div class="max-w-5xl mx-auto px-5 sm:px-8">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
       <div>
-        <div class="font-display font-extrabold text-3xl g">800+</div>
-        <div class="text-sm text-zinc-500 mt-1">active creators</div>
+        <div class="font-display font-extrabold text-[2.2rem] g leading-none">800+</div>
+        <div class="text-sm text-zinc-500 mt-2">active creators</div>
       </div>
       <div>
-        <div class="font-display font-extrabold text-3xl g">6</div>
-        <div class="text-sm text-zinc-500 mt-1">AI tools included</div>
+        <div class="font-display font-extrabold text-[2.2rem] g leading-none">6</div>
+        <div class="text-sm text-zinc-500 mt-2">AI tools included</div>
       </div>
       <div>
-        <div class="font-display font-extrabold text-3xl g">&lt;5s</div>
-        <div class="text-sm text-zinc-500 mt-1">avg. generation time</div>
+        <div class="font-display font-extrabold text-[2.2rem] g leading-none">&lt;5s</div>
+        <div class="text-sm text-zinc-500 mt-2">avg. generation time</div>
       </div>
       <div>
-        <div class="font-display font-extrabold text-3xl g">£9.99</div>
-        <div class="text-sm text-zinc-500 mt-1">per month, all tools</div>
+        <div class="font-display font-extrabold text-[2.2rem] g leading-none">£9.99</div>
+        <div class="text-sm text-zinc-500 mt-2">per month, all tools</div>
       </div>
     </div>
   </div>
@@ -302,155 +414,171 @@ html { scroll-behavior: smooth; }
 
     <div class="text-center mb-16">
       <div class="text-[11px] font-bold uppercase tracking-widest text-violet-400 mb-3">The Toolkit</div>
-      <h2 class="font-display font-extrabold text-[clamp(1.9rem,4vw,3rem)] tracking-tight mb-4">
+      <h2 class="font-display font-extrabold text-[clamp(2rem,4.5vw,3.2rem)] tracking-tight mb-5">
         Six tools. One <span class="g">creator engine.</span>
       </h2>
-      <p class="text-zinc-400 text-lg max-w-lg mx-auto">
-        Built for creators who post every day and can't afford to waste time on content that doesn't perform.
+      <p class="text-zinc-400 text-lg max-w-[520px] mx-auto">
+        Built for creators who post daily and can't afford to waste time on content that doesn't perform.
       </p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-      <!-- Caption Writer -->
-      <div class="card-glow group relative rounded-2xl border border-white/[0.08] p-6 transition-all duration-300 cursor-pointer hover:-translate-y-1"
-           style="background:rgba(13,13,24,.9)" onclick="location.href='app/?signup=1'">
-        <div class="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
-             style="background:linear-gradient(90deg,#7C3AED,#2DD4BF)"></div>
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4 flex-shrink-0"
+      <!-- 1. Caption Writer -->
+      <a href="app/?signup=1" class="tool-card rounded-2xl p-6 block no-underline group cursor-pointer">
+        <div class="tool-bar" style="background:linear-gradient(90deg,#7C3AED,#2DD4BF)"></div>
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5 flex-shrink-0"
              style="background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(45,212,191,.15))">✍️</div>
         <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Caption Writer</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-          Scroll-stopping captions with hooks and hashtags, tuned to your platform and tone. Pick Casual, Funny, Motivational — you get three options every time.
+        <p class="text-zinc-400 text-sm leading-relaxed mb-5">
+          Scroll-stopping captions with hooks and hashtags, tuned to your platform and vibe.
+          Pick Casual, Funny, or Motivational — you get three options every time.
         </p>
-        <span class="inline-flex items-center gap-1 text-xs font-semibold text-violet-400 group-hover:gap-2 transition-all">
-          Try it <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-violet-400 group-hover:gap-2.5 transition-all">
+          Try it free <span>→</span>
         </span>
-      </div>
+      </a>
 
-      <!-- Algo Analyzer -->
-      <div class="card-glow group relative rounded-2xl border border-white/[0.08] p-6 transition-all duration-300 cursor-pointer hover:-translate-y-1"
-           style="background:rgba(13,13,24,.9)" onclick="location.href='app/?signup=1'">
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4"
+      <!-- 2. Algo Analyzer -->
+      <a href="app/?signup=1" class="tool-card rounded-2xl p-6 block no-underline group cursor-pointer">
+        <div class="tool-bar" style="background:linear-gradient(90deg,#2DD4BF,#7C3AED)"></div>
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5"
              style="background:linear-gradient(135deg,rgba(45,212,191,.3),rgba(124,58,237,.15))">📊</div>
         <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Algo Analyzer</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-          Score any content idea out of 100 for algorithm performance — before you film a single second. Get specific tips to boost your score and reach.
+        <p class="text-zinc-400 text-sm leading-relaxed mb-5">
+          Score any content idea out of 100 for algorithm performance — before you film a single second.
+          Get specific, actionable tips to boost your reach.
         </p>
-        <span class="inline-flex items-center gap-1 text-xs font-semibold text-teal-400 group-hover:gap-2 transition-all">
-          Try it <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-teal-400 group-hover:gap-2.5 transition-all">
+          Try it free <span>→</span>
         </span>
-      </div>
+      </a>
 
-      <!-- Post History -->
-      <div class="card-glow group relative rounded-2xl border border-white/[0.08] p-6 transition-all duration-300 cursor-pointer hover:-translate-y-1"
-           style="background:rgba(13,13,24,.9)" onclick="location.href='app/?signup=1'">
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4"
-             style="background:linear-gradient(135deg,rgba(251,191,36,.25),rgba(124,58,237,.15))">📈</div>
+      <!-- 3. Post History Analyzer -->
+      <a href="app/?signup=1" class="tool-card rounded-2xl p-6 block no-underline group cursor-pointer">
+        <div class="tool-bar" style="background:linear-gradient(90deg,#fbbf24,#7C3AED)"></div>
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5"
+             style="background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(124,58,237,.15))">📈</div>
         <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Post History Analyzer</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-          Paste your recent posts and get a brutally honest breakdown of what's working, what to drop, and what your next best move is.
+        <p class="text-zinc-400 text-sm leading-relaxed mb-5">
+          Paste your recent posts and get a brutally honest breakdown of what's working, what to drop,
+          and your next best move based on your actual data.
         </p>
-        <span class="inline-flex items-center gap-1 text-xs font-semibold text-amber-400 group-hover:gap-2 transition-all">
-          Try it <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 group-hover:gap-2.5 transition-all">
+          Try it free <span>→</span>
         </span>
-      </div>
+      </a>
 
-      <!-- Brain Dump -->
-      <div class="card-glow group relative rounded-2xl border border-white/[0.08] p-6 transition-all duration-300 cursor-pointer hover:-translate-y-1"
-           style="background:rgba(13,13,24,.9)" onclick="location.href='app/?signup=1'">
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4"
+      <!-- 4. Brain Dump to Content -->
+      <a href="app/?signup=1" class="tool-card rounded-2xl p-6 block no-underline group cursor-pointer">
+        <div class="tool-bar" style="background:linear-gradient(90deg,#34d399,#2DD4BF)"></div>
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5"
              style="background:linear-gradient(135deg,rgba(52,211,153,.25),rgba(45,212,191,.15))">🧠</div>
         <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Brain Dump to Content</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-          Word-vomit your ideas in one textarea. Get back a structured, ready-to-post content plan for 5 posts, 10 posts, or a full 30-day calendar.
+        <p class="text-zinc-400 text-sm leading-relaxed mb-5">
+          Word-vomit your ideas into one textarea. Get back a structured, ready-to-post content plan
+          — 5 posts, 10 posts, or a full 30-day calendar.
         </p>
-        <span class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 group-hover:gap-2 transition-all">
-          Try it <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 group-hover:gap-2.5 transition-all">
+          Try it free <span>→</span>
         </span>
-      </div>
+      </a>
 
-      <!-- Comment Reply -->
-      <div class="card-glow group relative rounded-2xl border border-white/[0.08] p-6 transition-all duration-300 cursor-pointer hover:-translate-y-1"
-           style="background:rgba(13,13,24,.9)" onclick="location.href='app/?signup=1'">
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4"
+      <!-- 5. Comment Reply Assistant -->
+      <a href="app/?signup=1" class="tool-card rounded-2xl p-6 block no-underline group cursor-pointer">
+        <div class="tool-bar" style="background:linear-gradient(90deg,#60a5fa,#7C3AED)"></div>
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5"
              style="background:linear-gradient(135deg,rgba(96,165,250,.25),rgba(124,58,237,.15))">💬</div>
         <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Comment Reply Assistant</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-          Paste a batch of comments and get on-brand, genuine replies in seconds. Pick your tone — Friendly, Funny, Hype — and reply to 100% of your comments.
+        <p class="text-zinc-400 text-sm leading-relaxed mb-5">
+          Paste a batch of comments and get on-brand, genuine replies in seconds. Friendly, Funny, or Hype —
+          and reply to 100% of your comments without burning out.
         </p>
-        <span class="inline-flex items-center gap-1 text-xs font-semibold text-blue-400 group-hover:gap-2 transition-all">
-          Try it <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 group-hover:gap-2.5 transition-all">
+          Try it free <span>→</span>
         </span>
-      </div>
+      </a>
 
-      <!-- Viral Inspiration -->
-      <div class="card-glow group relative rounded-2xl border border-white/[0.08] p-6 transition-all duration-300 cursor-pointer hover:-translate-y-1"
-           style="background:rgba(13,13,24,.9)" onclick="location.href='app/?signup=1'">
-        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4"
+      <!-- 6. Viral Inspiration -->
+      <a href="app/?signup=1" class="tool-card rounded-2xl p-6 block no-underline group cursor-pointer">
+        <div class="tool-bar" style="background:linear-gradient(90deg,#fb7185,#7C3AED)"></div>
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5"
              style="background:linear-gradient(135deg,rgba(251,113,133,.25),rgba(124,58,237,.15))">🔥</div>
         <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Viral Inspiration</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-4">
-          Save viral posts you love into a personal library. Then remix any of them for your own niche with AI — same format, your voice, your audience.
+        <p class="text-zinc-400 text-sm leading-relaxed mb-5">
+          Save viral posts you love into a personal library. Then remix any of them for your niche —
+          same format and hook structure, your voice, your audience.
         </p>
-        <span class="inline-flex items-center gap-1 text-xs font-semibold text-rose-400 group-hover:gap-2 transition-all">
-          Try it <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-400 group-hover:gap-2.5 transition-all">
+          Try it free <span>→</span>
         </span>
-      </div>
+      </a>
 
-    </div><!-- /grid -->
+    </div>
+
+    <!-- Bottom CTA under grid -->
+    <div class="text-center mt-12">
+      <a href="app/?signup=1"
+         class="btn-primary inline-block px-8 py-4 rounded-xl text-white font-display font-bold text-base no-underline">
+        Launch Dashboard — 3 Days Free →
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
      HOW IT WORKS
 ══════════════════════════════════════════════════════════ -->
-<section id="how" class="py-24 sm:py-32 border-t border-white/[0.06]">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
+<section id="how" class="py-24 sm:py-32 border-t border-white/[0.06] relative overflow-hidden">
+  <div class="section-glow absolute inset-0 pointer-events-none"></div>
+  <div class="grid-tex absolute inset-0 pointer-events-none opacity-50"></div>
 
+  <div class="relative max-w-5xl mx-auto px-5 sm:px-8">
     <div class="text-center mb-16">
       <div class="text-[11px] font-bold uppercase tracking-widest text-teal-400 mb-3">How it works</div>
-      <h2 class="font-display font-extrabold text-[clamp(1.9rem,4vw,3rem)] tracking-tight">
-        Up and running in <span class="g">under 2 minutes.</span>
+      <h2 class="font-display font-extrabold text-[clamp(2rem,4.5vw,3.2rem)] tracking-tight">
+        From zero to <span class="g">posting in 2 minutes.</span>
       </h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative">
 
-      <!-- Step 1 -->
-      <div class="relative text-center md:text-left">
-        <div class="hidden md:block absolute top-6 left-1/2 w-full h-px"
-             style="background:linear-gradient(90deg,rgba(124,58,237,.5),rgba(45,212,191,.3));left:calc(50% + 36px);width:calc(100% - 36px)"></div>
-        <div class="inline-flex w-12 h-12 rounded-2xl items-center justify-center font-display font-extrabold text-lg text-white mb-5 relative"
+      <!-- connector lines desktop -->
+      <div class="hidden md:block absolute top-12 left-0 right-0 h-px pointer-events-none"
+           style="background:linear-gradient(90deg,transparent 10%,rgba(124,58,237,.3) 30%,rgba(45,212,191,.3) 70%,transparent 90%);top:3rem"></div>
+
+      <div class="relative rounded-2xl p-7 border border-white/[0.07]"
+           style="background:rgba(12,12,22,.8)">
+        <div class="inline-flex w-12 h-12 rounded-2xl items-center justify-center font-display font-extrabold text-lg text-white mb-5"
              style="background:linear-gradient(135deg,#7C3AED,#5b21b6)">1</div>
-        <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Sign up in 30 seconds</h3>
+        <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Sign up free</h3>
         <p class="text-zinc-400 text-sm leading-relaxed">
-          Create your account — no credit card needed to start. Your 3-day free trial begins the moment you land in the dashboard.
+          No credit card. No friction. Create your account and you're inside the dashboard in under 30 seconds.
+          Your 3-day trial starts immediately.
         </p>
       </div>
 
-      <!-- Step 2 -->
-      <div class="relative text-center md:text-left">
-        <div class="hidden md:block absolute top-6 left-1/2 w-full h-px"
-             style="background:linear-gradient(90deg,rgba(45,212,191,.3),rgba(45,212,191,.5));left:calc(50% + 36px);width:calc(100% - 36px)"></div>
+      <div class="relative rounded-2xl p-7 border border-white/[0.07]"
+           style="background:rgba(12,12,22,.8)">
         <div class="inline-flex w-12 h-12 rounded-2xl items-center justify-center font-display font-extrabold text-lg text-white mb-5"
-             style="background:linear-gradient(135deg,#5b21b6,#2DD4BF)">2</div>
+             style="background:linear-gradient(135deg,#5b21b6,#0d9488)">2</div>
         <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Pick a tool and go</h3>
         <p class="text-zinc-400 text-sm leading-relaxed">
-          Choose any of the 6 tools from your sidebar, describe your content or paste your posts, and hit generate. The AI does the rest in seconds.
+          Choose from 6 tools in your sidebar. Type in your content idea or paste your posts —
+          the AI generates results in seconds. No prompting skill required.
         </p>
       </div>
 
-      <!-- Step 3 -->
-      <div class="text-center md:text-left">
+      <div class="relative rounded-2xl p-7 border border-white/[0.07]"
+           style="background:rgba(12,12,22,.8)">
         <div class="inline-flex w-12 h-12 rounded-2xl items-center justify-center font-display font-extrabold text-lg text-zinc-900 mb-5"
              style="background:linear-gradient(135deg,#2DD4BF,#0d9488)">3</div>
-        <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Post and watch it work</h3>
+        <h3 class="font-display font-bold text-lg mb-2 text-zinc-100">Post smarter. Grow faster.</h3>
         <p class="text-zinc-400 text-sm leading-relaxed">
-          Better captions. Higher-scoring ideas. Consistent posting. Your content history feeds back into your strategy — it compounds over time.
+          Better captions. Higher-scoring ideas. More comments replied. Your strategy compounds —
+          the more you use it, the more your content improves.
         </p>
       </div>
-
     </div>
   </div>
 </section>
@@ -458,108 +586,97 @@ html { scroll-behavior: smooth; }
 <!-- ══════════════════════════════════════════════════════════
      TESTIMONIALS
 ══════════════════════════════════════════════════════════ -->
-<section id="stories" class="py-24 sm:py-32 border-t border-white/[0.06]" style="background:rgba(255,255,255,.015)">
+<section id="stories" class="py-24 sm:py-32 border-t border-white/[0.06]"
+         style="background:rgba(255,255,255,.014)">
   <div class="max-w-6xl mx-auto px-5 sm:px-8">
 
     <div class="text-center mb-16">
       <div class="text-[11px] font-bold uppercase tracking-widest text-violet-400 mb-3">Creator Stories</div>
-      <h2 class="font-display font-extrabold text-[clamp(1.9rem,4vw,3rem)] tracking-tight">
+      <h2 class="font-display font-extrabold text-[clamp(2rem,4.5vw,3.2rem)] tracking-tight">
         Real creators. <span class="g">Real results.</span>
       </h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-      <!-- Testimonial 1 -->
-      <div class="testi-card rounded-2xl border border-white/[0.08] p-7 transition-all duration-300"
-           style="background:rgba(13,13,24,.9)">
-        <div class="flex gap-0.5 mb-4">
-          <span class="text-amber-400 text-sm">★★★★★</span>
-        </div>
+      <div class="tcard rounded-2xl p-7">
+        <div class="text-amber-400 text-sm mb-4 tracking-wider">★★★★★</div>
         <p class="text-zinc-300 text-[15px] leading-relaxed mb-6">
           "I was spending 45 minutes writing captions that got 200 likes. Now I use Caption Writer,
           tweak one line, and I'm posting content that consistently hits 2k+.
-          <strong class="text-zinc-100">It's embarrassing how much time I was wasting.</strong>"
+          <strong class="text-zinc-100">It's embarrassing how much time I was wasting before.</strong>"
         </p>
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-base font-bold text-violet-300 flex-shrink-0"
+          <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm text-violet-300"
                style="background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(45,212,191,.15))">AI</div>
           <div>
             <div class="text-sm font-semibold text-zinc-100">Aisha I.</div>
-            <div class="text-xs text-zinc-500">@aishalifts &nbsp;·&nbsp;
-              <span class="text-[11px] px-2 py-0.5 rounded-full font-medium"
+            <div class="flex items-center gap-1.5 text-xs text-zinc-500 mt-0.5">
+              @aishalifts &nbsp;·&nbsp;
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold"
                     style="background:rgba(251,113,133,.12);color:#fb7185">TikTok creator</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Testimonial 2 -->
-      <div class="testi-card rounded-2xl border border-white/[0.08] p-7 transition-all duration-300"
-           style="background:rgba(13,13,24,.9)">
-        <div class="flex gap-0.5 mb-4">
-          <span class="text-amber-400 text-sm">★★★★★</span>
-        </div>
+      <div class="tcard rounded-2xl p-7">
+        <div class="text-amber-400 text-sm mb-4 tracking-wider">★★★★★</div>
         <p class="text-zinc-300 text-[15px] leading-relaxed mb-6">
-          "The Algo Analyzer told me my planned carousel was a 34/100. I wasn't going to bother changing it,
-          but followed the suggestions anyway.
-          <strong class="text-zinc-100">Highest-performing reel in three months.</strong> I use it before every post now."
+          "The Algo Analyzer told me my planned carousel was a 34/100. I was sceptical but followed the
+          suggestions anyway. <strong class="text-zinc-100">Highest-performing reel in three months.</strong>
+          Now I score every idea before filming."
         </p>
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-base font-bold text-teal-300 flex-shrink-0"
+          <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm text-teal-300"
                style="background:linear-gradient(135deg,rgba(45,212,191,.3),rgba(124,58,237,.15))">JK</div>
           <div>
             <div class="text-sm font-semibold text-zinc-100">James K.</div>
-            <div class="text-xs text-zinc-500">@jkbuilds &nbsp;·&nbsp;
-              <span class="text-[11px] px-2 py-0.5 rounded-full font-medium"
+            <div class="flex items-center gap-1.5 text-xs text-zinc-500 mt-0.5">
+              @jkbuilds &nbsp;·&nbsp;
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold"
                     style="background:rgba(232,121,249,.12);color:#e879f9">Instagram creator</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Testimonial 3 -->
-      <div class="testi-card rounded-2xl border border-white/[0.08] p-7 transition-all duration-300"
-           style="background:rgba(13,13,24,.9)">
-        <div class="flex gap-0.5 mb-4">
-          <span class="text-amber-400 text-sm">★★★★★</span>
-        </div>
+      <div class="tcard rounded-2xl p-7">
+        <div class="text-amber-400 text-sm mb-4 tracking-wider">★★★★★</div>
         <p class="text-zinc-300 text-[15px] leading-relaxed mb-6">
-          "I was overwhelmed every Sunday trying to plan the week. Brain Dump changed everything.
-          I dump all my ideas in and get back a full content calendar.
-          <strong class="text-zinc-100">Planning now takes 10 minutes instead of two hours.</strong>"
+          "I used to spend my whole Sunday planning the week and still feel unprepared. With Brain Dump
+          I type my random ideas and get back a full 30-day calendar.
+          <strong class="text-zinc-100">Content planning went from 2 hours to 10 minutes.</strong>"
         </p>
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-base font-bold text-emerald-300 flex-shrink-0"
+          <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm text-emerald-300"
                style="background:linear-gradient(135deg,rgba(52,211,153,.3),rgba(45,212,191,.15))">PV</div>
           <div>
             <div class="text-sm font-semibold text-zinc-100">Priya V.</div>
-            <div class="text-xs text-zinc-500">@priyacooks &nbsp;·&nbsp;
-              <span class="text-[11px] px-2 py-0.5 rounded-full font-medium"
+            <div class="flex items-center gap-1.5 text-xs text-zinc-500 mt-0.5">
+              @priyacooks &nbsp;·&nbsp;
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold"
                     style="background:rgba(251,113,133,.12);color:#fb7185">TikTok &amp; Instagram</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Testimonial 4 -->
-      <div class="testi-card rounded-2xl border border-white/[0.08] p-7 transition-all duration-300"
-           style="background:rgba(13,13,24,.9)">
-        <div class="flex gap-0.5 mb-4">
-          <span class="text-amber-400 text-sm">★★★★★</span>
-        </div>
+      <div class="tcard rounded-2xl p-7">
+        <div class="text-amber-400 text-sm mb-4 tracking-wider">★★★★★</div>
         <p class="text-zinc-300 text-[15px] leading-relaxed mb-6">
-          "The Comment Reply tool is genuinely addictive. I reply to 100% of my comments now
-          — it takes minutes instead of an hour. My engagement rate has almost doubled
-          because <strong class="text-zinc-100">the algorithm loves it when you actually respond.</strong>"
+          "The Comment Reply tool is genuinely addictive. I reply to every comment now and it takes
+          minutes — not an hour. <strong class="text-zinc-100">My engagement rate nearly doubled</strong>
+          because the algorithm rewards you when you actually respond."
         </p>
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center text-base font-bold text-blue-300 flex-shrink-0"
+          <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-sm text-blue-300"
                style="background:linear-gradient(135deg,rgba(96,165,250,.3),rgba(124,58,237,.15))">LF</div>
           <div>
             <div class="text-sm font-semibold text-zinc-100">Leonie F.</div>
-            <div class="text-xs text-zinc-500">@leoniebeauty &nbsp;·&nbsp;
-              <span class="text-[11px] px-2 py-0.5 rounded-full font-medium"
+            <div class="flex items-center gap-1.5 text-xs text-zinc-500 mt-0.5">
+              @leoniebeauty &nbsp;·&nbsp;
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold"
                     style="background:rgba(251,113,133,.12);color:#fb7185">TikTok creator</span>
             </div>
           </div>
@@ -578,42 +695,40 @@ html { scroll-behavior: smooth; }
 
     <div class="text-center mb-14">
       <div class="text-[11px] font-bold uppercase tracking-widest text-teal-400 mb-3">Pricing</div>
-      <h2 class="font-display font-extrabold text-[clamp(1.9rem,4vw,3rem)] tracking-tight">
-        One plan. <span class="g">Everything included.</span>
+      <h2 class="font-display font-extrabold text-[clamp(2rem,4.5vw,3.2rem)] tracking-tight">
+        One plan. <span class="g">Everything unlocked.</span>
       </h2>
+      <p class="text-zinc-500 text-base mt-4 max-w-md mx-auto">
+        No paywalled tools. No usage caps. Every update included for free.
+      </p>
     </div>
 
-    <!-- Single pricing card -->
-    <div class="pricing-glow max-w-md mx-auto rounded-3xl border border-violet-800/40 overflow-hidden"
-         style="background:rgba(13,13,24,.98)">
-
-      <!-- Gradient top bar -->
+    <div class="price-card max-w-[420px] mx-auto rounded-3xl border border-violet-800/35 overflow-hidden">
       <div class="h-1" style="background:linear-gradient(90deg,#7C3AED,#2DD4BF)"></div>
 
       <div class="p-8 sm:p-10">
+
         <!-- Trial badge -->
-        <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 text-[11px] font-bold uppercase tracking-wider text-emerald-400"
-             style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25)">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+        <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-7 text-[11px] font-bold uppercase tracking-wider text-emerald-300"
+             style="background:rgba(52,211,153,.09);border:1px solid rgba(52,211,153,.22)">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pdot"></span>
           3 days free — no card required
         </div>
 
-        <!-- Price -->
-        <div class="flex items-baseline gap-1 mb-1">
-          <span class="font-display font-extrabold text-5xl tracking-tight text-zinc-100">£9.99</span>
-          <span class="text-zinc-500 text-base font-medium">/ month</span>
+        <div class="flex items-baseline gap-1.5 mb-1">
+          <span class="font-display font-extrabold text-5xl tracking-tight text-zinc-50">£9.99</span>
+          <span class="text-zinc-500 text-base">/&nbsp;month</span>
         </div>
-        <p class="text-zinc-500 text-sm mb-8">Billed monthly. Cancel in one click.</p>
+        <p class="text-zinc-600 text-sm mb-8">Billed monthly. Cancel in one click, any time.</p>
 
-        <!-- Features -->
-        <ul class="space-y-3 mb-8">
+        <ul class="space-y-3.5 mb-9">
           <li class="flex items-start gap-3 text-sm">
             <span class="text-teal-400 font-bold flex-shrink-0 mt-0.5">✓</span>
             <span class="text-zinc-300">All 6 AI tools — unlimited generations</span>
           </li>
           <li class="flex items-start gap-3 text-sm">
             <span class="text-teal-400 font-bold flex-shrink-0 mt-0.5">✓</span>
-            <span class="text-zinc-300">Instagram &amp; TikTok support across all tools</span>
+            <span class="text-zinc-300">Instagram &amp; TikTok support across every tool</span>
           </li>
           <li class="flex items-start gap-3 text-sm">
             <span class="text-teal-400 font-bold flex-shrink-0 mt-0.5">✓</span>
@@ -621,24 +736,43 @@ html { scroll-behavior: smooth; }
           </li>
           <li class="flex items-start gap-3 text-sm">
             <span class="text-teal-400 font-bold flex-shrink-0 mt-0.5">✓</span>
-            <span class="text-zinc-300">Content history saved across devices</span>
+            <span class="text-zinc-300">Algo scores + full recommendations</span>
           </li>
           <li class="flex items-start gap-3 text-sm">
             <span class="text-teal-400 font-bold flex-shrink-0 mt-0.5">✓</span>
-            <span class="text-zinc-300">Algo Analyzer with scored recommendations</span>
+            <span class="text-zinc-300">Content history synced across devices</span>
           </li>
           <li class="flex items-start gap-3 text-sm">
             <span class="text-teal-400 font-bold flex-shrink-0 mt-0.5">✓</span>
-            <span class="text-zinc-300">New tools added at no extra cost</span>
+            <span class="text-zinc-300">Every new tool added — free, forever</span>
           </li>
         </ul>
 
-        <!-- CTA -->
         <a href="app/?signup=1"
-           class="btn-g block w-full py-4 rounded-xl text-white font-display font-bold text-base no-underline text-center shadow-lg shadow-violet-950/50">
-          Start Free Trial →
+           class="btn-primary block w-full py-4 rounded-xl text-white font-display font-bold text-base no-underline text-center">
+          Launch Dashboard — Free Trial →
         </a>
-        <p class="text-center text-xs text-zinc-600 mt-4">No charge until your 3-day trial ends.</p>
+        <p class="text-center text-xs text-zinc-700 mt-4">No charge until your 3-day trial ends.</p>
+      </div>
+    </div>
+
+    <!-- FAQ strip -->
+    <div class="mt-14 max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div class="rounded-xl p-5 border border-white/[0.06]" style="background:rgba(255,255,255,.02)">
+        <div class="text-sm font-semibold text-zinc-200 mb-1">What counts as a "generation"?</div>
+        <div class="text-sm text-zinc-500">Each tool run is one generation. We don't cap them — generate as many captions, scores, or calendars as you need.</div>
+      </div>
+      <div class="rounded-xl p-5 border border-white/[0.06]" style="background:rgba(255,255,255,.02)">
+        <div class="text-sm font-semibold text-zinc-200 mb-1">Can I cancel mid-month?</div>
+        <div class="text-sm text-zinc-500">Yes. Cancel any time from your account settings and you won't be charged again. You keep access until the period ends.</div>
+      </div>
+      <div class="rounded-xl p-5 border border-white/[0.06]" style="background:rgba(255,255,255,.02)">
+        <div class="text-sm font-semibold text-zinc-200 mb-1">Does it work for both platforms?</div>
+        <div class="text-sm text-zinc-500">All 6 tools support Instagram and TikTok, with platform-specific tone and hashtag logic baked in.</div>
+      </div>
+      <div class="rounded-xl p-5 border border-white/[0.06]" style="background:rgba(255,255,255,.02)">
+        <div class="text-sm font-semibold text-zinc-200 mb-1">Will new tools cost extra?</div>
+        <div class="text-sm text-zinc-500">Never. Every tool we add in the future is included in your subscription at no extra charge.</div>
       </div>
     </div>
   </div>
@@ -648,39 +782,36 @@ html { scroll-behavior: smooth; }
      FINAL CTA
 ══════════════════════════════════════════════════════════ -->
 <section class="py-24 sm:py-32 relative overflow-hidden border-t border-white/[0.06]">
-
-  <!-- Background glow -->
-  <div class="absolute inset-0 pointer-events-none"
-       style="background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(107,33,168,.22) 0%,rgba(45,212,191,.06) 50%,transparent 70%)"></div>
-  <div class="grid-texture absolute inset-0 opacity-60 pointer-events-none"></div>
+  <div class="section-glow absolute inset-0 pointer-events-none"></div>
+  <div class="grid-tex absolute inset-0 pointer-events-none opacity-40"></div>
 
   <div class="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
     <div class="text-[11px] font-bold uppercase tracking-widest text-violet-400 mb-4">Ready when you are</div>
-    <h2 class="font-display font-extrabold text-[clamp(2rem,5vw,3.5rem)] tracking-tight leading-tight mb-6">
+    <h2 class="font-display font-extrabold text-[clamp(2.2rem,5.5vw,3.8rem)] tracking-tight leading-tight mb-6">
       Your next viral post<br>starts <span class="g">right here.</span>
     </h2>
     <p class="text-zinc-400 text-lg max-w-xl mx-auto mb-10">
-      Join 800+ creators who use ReelRocket to post smarter, grow faster, and spend less time staring at a blank screen.
+      Join 800+ creators who use ReelRocket to post smarter, grow faster,
+      and spend less time staring at a blank screen.
     </p>
     <div class="flex flex-col sm:flex-row gap-3 justify-center">
       <a href="app/?signup=1"
-         class="btn-g px-10 py-4 rounded-xl text-white font-display font-bold text-base no-underline text-center shadow-xl shadow-violet-950/60">
-        Start Free Trial →
+         class="btn-primary px-10 py-4 rounded-xl text-white font-display font-bold text-base no-underline text-center">
+        🚀 Launch Dashboard — Free for 3 Days
       </a>
       <a href="app/"
-         class="px-10 py-4 rounded-xl font-medium text-base no-underline text-center text-zinc-400 hover:text-zinc-100 border border-white/10 hover:border-white/20 transition-all"
-         style="background:rgba(255,255,255,.04)">
+         class="btn-secondary px-10 py-4 rounded-xl font-medium text-base no-underline text-center text-zinc-400 hover:text-zinc-100">
         Sign in instead
       </a>
     </div>
-    <p class="text-sm text-zinc-600 mt-5">3 days free &nbsp;·&nbsp; £9.99/month &nbsp;·&nbsp; cancel anytime</p>
+    <p class="text-sm text-zinc-600 mt-5">No credit card required &nbsp;·&nbsp; £9.99/month &nbsp;·&nbsp; cancel anytime</p>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════════════════════ -->
-<footer class="border-t border-white/[0.06] py-10" style="background:rgba(0,0,0,.3)">
+<footer class="border-t border-white/[0.06] py-10" style="background:rgba(0,0,0,.28)">
   <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
       <a href="#" class="font-display font-extrabold text-lg tracking-tight text-zinc-100 no-underline">
@@ -688,6 +819,7 @@ html { scroll-behavior: smooth; }
       </a>
       <div class="flex items-center gap-6 text-sm text-zinc-500">
         <a href="#tools"   class="hover:text-zinc-300 transition-colors no-underline">Tools</a>
+        <a href="#how"     class="hover:text-zinc-300 transition-colors no-underline">How it works</a>
         <a href="#pricing" class="hover:text-zinc-300 transition-colors no-underline">Pricing</a>
         <a href="app/"     class="hover:text-zinc-300 transition-colors no-underline">Sign in</a>
         <a href="app/?signup=1" class="hover:text-zinc-300 transition-colors no-underline">Sign up</a>
