@@ -2,7 +2,7 @@
 // token and strips the hash as soon as it initializes, so checking later races.
 const arrivedViaRecovery = /type=recovery/.test(location.hash);
 
-const sb = supabase.createClient(RR_CONFIG.SUPABASE_URL, RR_CONFIG.SUPABASE_ANON_KEY);
+const sb = supabase.createClient(CLUTVI_CONFIG.SUPABASE_URL, CLUTVI_CONFIG.SUPABASE_ANON_KEY);
 
 let currentUser = null;
 let currentProfile = null;

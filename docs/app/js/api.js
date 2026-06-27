@@ -3,7 +3,7 @@
 async function callClaude(prompt) {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) throw new Error('Your session expired — please sign in again.');
-  const resp = await fetch(`${RR_CONFIG.SUPABASE_URL}/functions/v1/claude-proxy`, {
+  const resp = await fetch(`${CLUTVI_CONFIG.SUPABASE_URL}/functions/v1/claude-proxy`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ async function callClaude(prompt) {
 async function callFunction(name) {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) throw new Error('Your session expired — please sign in again.');
-  const resp = await fetch(`${RR_CONFIG.SUPABASE_URL}/functions/v1/${name}`, {
+  const resp = await fetch(`${CLUTVI_CONFIG.SUPABASE_URL}/functions/v1/${name}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
